@@ -28,6 +28,7 @@ video {
 
 .onoff-button {
     background-color: rgba(2, 128, 78, 0.79);
+    color: #fff;
     border-radius: 10px;
     padding: 10px 13px;
     font-family: inherit;

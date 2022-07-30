@@ -4,6 +4,7 @@
     const audioList = document.querySelector("#audioList");
     const speakerList = document.querySelector("#speakerList");
     const cameraButton = document.querySelector(".camera");
+    const micButton = document.querySelector(".mic");
     const selectedDevices = {
         camera: "",
         audio: "",
@@ -22,7 +23,7 @@
     }
 
     const registerClickEvent = () => {
-        const handleOnOff = (e) => {
+        const handleCameraOnOff = (e) => {
             const { target } = e;
             if (target.classList.contains("on")) {
                 target.classList.remove("on");
@@ -35,9 +36,25 @@
                 target.innerText = "Camera ON";
                 handleCameraVisible(true);
             }
-        }
+        };
 
-        cameraButton.addEventListener("click", handleOnOff);
+        const handleMicOnOff = (e) => {
+            const { target } = e;
+            if (target.classList.contains("on")) {
+                target.classList.remove("on");
+                target.classList.add("off");
+                target.innerText = "Mic OFF";
+                handleMicUse(false);
+            } else {
+                target.classList.remove("off");
+                target.classList.add("on");
+                target.innerText = "Mic ON";
+                handleMicUse(true);
+            }
+        };
+
+        cameraButton.addEventListener("click", handleCameraOnOff);
+        micButton.addEventListener("click", handleMicOnOff);
     }
 
     const registerChangeEvent = () => {
@@ -129,6 +146,14 @@
         const tracks = localStream.getVideoTracks();
         tracks.forEach((track) => {
             track.enabled = show;
+        })
+        video.srcObject = localStream;
+    }
+
+    const handleMicUse = (use) => {
+        const tracks = localStream.getAudioTracks();
+        tracks.forEach((track) => {
+            track.enabled = use;
         })
         video.srcObject = localStream;
     }
