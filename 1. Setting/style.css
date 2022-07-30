@@ -19,6 +19,7 @@ video {
      transform: scaleX(-1);
      margin-bottom: 40px;
      width: 640px;
+     height: 360px;
 }
 
 .list-wrapper {
