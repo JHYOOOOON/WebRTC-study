@@ -3,6 +3,7 @@
     const cameraList = document.querySelector("#cameraList");
     const audioList = document.querySelector("#audioList");
     const speakerList = document.querySelector("#speakerList");
+    const cameraButton = document.querySelector(".camera");
     const selectedDevices = {
         camera: "",
         audio: "",
@@ -14,9 +15,29 @@
         registerChangeEvent();
         registerDeviceUpdateEvent();
         registerPermissionChangeEvent();
+        registerClickEvent();
         checkPermissions();
         updateList();
         startStreaming();
+    }
+
+    const registerClickEvent = () => {
+        const handleOnOff = (e) => {
+            const { target } = e;
+            if (target.classList.contains("on")) {
+                target.classList.remove("on");
+                target.classList.add("off");
+                target.innerText = "Camera OFF";
+                handleCameraVisible(false);
+            } else {
+                target.classList.remove("off");
+                target.classList.add("on");
+                target.innerText = "Camera ON";
+                handleCameraVisible(true);
+            }
+        }
+
+        cameraButton.addEventListener("click", handleOnOff);
     }
 
     const registerChangeEvent = () => {
@@ -101,6 +122,14 @@
             }
         }
         localStream = await navigator.mediaDevices.getUserMedia(constraints);
+        video.srcObject = localStream;
+    }
+
+    const handleCameraVisible = (show) => {
+        const tracks = localStream.getVideoTracks();
+        tracks.forEach((track) => {
+            track.enabled = show;
+        })
         video.srcObject = localStream;
     }
 
