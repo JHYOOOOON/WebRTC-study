@@ -13,6 +13,7 @@
     const initialSetting = () => {
         registerChangeEvent();
         registerDeviceUpdateEvent();
+        registerPermissionChangeEvent();
         checkPermissions();
         updateList();
         startStreaming();
@@ -38,6 +39,15 @@
             updateList();
             startStreaming();
         }
+    }
+
+    const registerPermissionChangeEvent = () => {
+        navigator.permissions.query({name: "camera"}, {name: "microphone"}).then((permissionStatus) => {
+            permissionStatus.onchange = () => {
+                updateList();
+                startStreaming();
+        };
+});
     }
     
     const checkPermissions = () => {
