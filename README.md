@@ -1,6 +1,9 @@
 # WebRTC-study
 [WebRTC 문서](https://webrtc.org/getting-started/media-devices)
 
+## 미니 프로젝트
+[1. 장치 설정하기](https://github.com/JHYOOOOON/WebRTC-study/blob/main/1.%20Setting/README.md)
+
 ### 미디어 기기 시작하기
 - `navigator.mediaDevices` 객체를 통해 액세스
 - `getUserMedia()` 호출은 각 장치(카메라, 마이크)에 대한 권한 요청을 트리거
