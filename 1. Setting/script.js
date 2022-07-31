@@ -84,8 +84,8 @@
             permissionStatus.onchange = () => {
                 updateList();
                 startStreaming();
-        };
-});
+            };
+        });
     }
     
     const checkPermissions = () => {
