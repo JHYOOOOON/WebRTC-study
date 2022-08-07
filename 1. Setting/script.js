@@ -112,6 +112,9 @@
         element.innerHTML = listElement;
         
         if (selectedDevices[name]) {
+            if (list.filter(item => item.deviceId === selectedDevices[name]).length === 0) {
+                selectedDevices[name] = list[0].deviceId;
+            }
             element.value = selectedDevices[name];
         } else {
             saveDevices(name, list[0].deviceId);
